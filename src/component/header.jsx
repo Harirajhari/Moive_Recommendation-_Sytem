@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import flimLogo from "../assets/flim-logo.svg"
 import './Header.css'
-import { Link } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Link , useNavigate } from 'react-router-dom';
+import { Search } from 'lucide-react'
+
 const Header = (props) => {
     const { searchData } = props;
     const [searchInput, setSearchInput] = useState('');
     const [suggestions, setSuggestions] = useState([]);
+    const history = useNavigate();
 
-
+//serach the movie part
     const handleInputChange = (e) =>{
         const input = e.target.value;
         console.log(input);
@@ -28,6 +30,11 @@ const Header = (props) => {
     const clearSearchInput = () => {
             setSearchInput('');
             setSuggestions([]);
+    };
+
+    const handleMovieClick = (movieId) => {
+        history(`/movie/${movieId}`);
+        clearSearchInput();
     };
 
     return (
@@ -51,12 +58,9 @@ const Header = (props) => {
                     {suggestions.length > 0 && (
                         <ul className="suggestions">
                             {suggestions.map((movie, index) => (
-                                <li key={index} onClick={() => {
-                                    setSearchInput(movie.movieName);
-                                    clearSearchInput();
-                                }}>
-                                    {movie.movieName}
-                                </li>
+                                <li key={index} onClick={() => handleMovieClick(movie._id)}>
+                                {movie.movieName}
+                            </li>
                             ))}
                         </ul>
                     )}

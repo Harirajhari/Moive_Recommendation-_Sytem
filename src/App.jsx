@@ -1,34 +1,50 @@
+// git commit -m "first commit"
+// git branch -M main
+// git add .
+// git push -u origin main
+
+// App.jsx
 import { useEffect, useState } from "react";
-import Dashboard from "./component/Dashboard"
-import Header from "./component/header"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Dashboard from "./component/Dashboard";
+import Header from "./component/header";
 import MovieList from "./component/movieList";
+import Category from "./component/category";
 import axios from "axios";
-import "./app.css"
+import "./app.css";
 
 function App() {
+  const [data, setData] = useState(null);
 
-const [data , setData] = useState(null);
-
-
-useEffect(()=>{
-  const fetechData = async()=>{
-    try {
-      const response = await axios.get("http://localhost:8000/");
-      const sortedData = response.data.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
-      console.log(sortedData);
-      setData(sortedData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetechData()
-},[])
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/");
+        const sortedData = response.data.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+        setData(sortedData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
-    <>
-    <Header searchData={data} />
-    <div style={{ margin: "20px" }}>
+    <Router>
+      <Header searchData={data} />
+      <Routes>
+        <Route path="/" element={<Home data={data} />} />
+        <Route path="/movie/:id" element={<Category />} />
+      </Routes>
+    </Router>
+  );
+}
+
+// Home component to render Dashboard and MovieList
+function Home({ data }) {
+  return (
+    <div>
+      <div style={{ margin: "20px" }}>
         <h2>Data Table</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
@@ -54,10 +70,10 @@ useEffect(()=>{
           </tbody>
         </table>
       </div>
-      <Dashboard data={data} set={setData}/>
-      <MovieList data={data} setData={setData}/>
-    </>
-  )
+      <Dashboard data={data} />
+      <MovieList data={data} />
+    </div>
+  );
 }
 
-export default App
+export default App;

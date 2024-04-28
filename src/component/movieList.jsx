@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom';
 import "./movieList.css"
 
 const MovieList = (props) => {
@@ -39,13 +40,13 @@ const MovieList = (props) => {
             <div className='parent'>
                 <div className='card-container' ref={cardContainerRef}>
                     {ratingcategory && ratingcategory.map((item, index) => (
-                        <div className='card' key={item._id}>
-                            <img src={item.movieImage} alt='Movie poster' />
-                            <div>
-                                <h1>{item.movieName}</h1>
-                                <p>{item.genre}</p>
-                            </div>
+                        <Link to={`/movie/${item._id}`} key={item._id} className='card'>
+                        <img src={item.movieImage} alt='Movie poster' />
+                        <div>
+                            <h1>{item.movieName}</h1>
+                            <p>{item.genre}</p>
                         </div>
+                    </Link>
                     ))}
                 </div>
             </div>
