@@ -41,7 +41,7 @@ const MovieList = (props) => {
                 <div className='card-container' ref={cardContainerRef}>
                     {ratingcategory && ratingcategory.map((item, index) => (
                         <Link to={`/movie/${item._id}`} key={item._id} className='card'>
-                        <img src={item.movieImage} alt='Movie poster' />
+                        <img src={`http://localhost:8000/images/${item.movieImage}`} alt='Movie poster' />
                         <div>
                             <h1>{item.movieName}</h1>
                             <p>{item.genre}</p>

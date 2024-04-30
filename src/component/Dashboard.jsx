@@ -22,7 +22,9 @@ function Dashboard(props) {
                 <div className="carousel-inner" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                     {latestItems.map((item, index) => (
                         <div className="slide" key={index}>
-                            <img src={item.movieImage} alt={item.movieName} />
+                            <img src={`http://localhost:8000/images/${item.movieImage}`} alt={item.movieName} />
+                            {/* <h1>{item.movieImage}</h1> */}
+
                             <h1>{item.movieName}</h1>
                         </div>
                     ))}

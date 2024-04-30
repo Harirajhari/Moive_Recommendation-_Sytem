@@ -45,30 +45,7 @@ function Home({ data }) {
   return (
     <div>
       <div style={{ margin: "20px" }}>
-        <h2>Data Table</h2>
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead>
-            <tr>
-              <th>Movie Name</th>
-              <th>Language</th>
-              <th>Release Date</th>
-              <th>Rating</th>
-              <th>Genre</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data &&
-              data.map((movie) => (
-                <tr key={movie._id}>
-                  <td>{movie.movieName}</td>
-                  <td>{movie.language}</td>
-                  <td>{movie.releaseDate}</td>
-                  <td>{movie.rating}</td>
-                  <td>{movie.genre}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        
       </div>
       <Dashboard data={data} />
       <MovieList data={data} />

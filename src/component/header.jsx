@@ -47,7 +47,7 @@ const Header = (props) => {
                 <div className='header-routes'>
                     <Link to={'/'} className='link'>Home</Link>
                     <Link href='#genres' className='link'>Genres</Link>
-                    <Link to={'/recommendation'} className='link'>Recommended</Link>
+                    <Link to={'/Lanugages'} className='link'>Languages</Link>
                 </div>
             </div>
 
