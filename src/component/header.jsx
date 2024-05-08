@@ -8,34 +8,58 @@ const Header = (props) => {
     const { searchData } = props;
     const [searchInput, setSearchInput] = useState('');
     const [suggestions, setSuggestions] = useState([]);
+    // const [selectedGenre, setSelectedGenre] = useState('');
     const history = useNavigate();
 
-//serach the movie part
+    // Search the movie part
     const handleInputChange = (e) =>{
         const input = e.target.value;
-        console.log(input);
         setSearchInput(input);
 
-        if(input == 0)
-        {
+        if(input === '') {
             setSuggestions([]);
             return;
         }
 
-        const filtersearch = searchData.filter(item => item.movieName.toLowerCase().includes(input.toLowerCase()));
-        console.log(filtersearch);
-        setSuggestions(filtersearch);
+        const filterSearch = searchData?.filter(item => item.movieName.toLowerCase().includes(input.toLowerCase()));
+        setSuggestions(filterSearch);
     };
 
+    // Clear search input and suggestions
     const clearSearchInput = () => {
-            setSearchInput('');
-            setSuggestions([]);
+        setSearchInput('');
+        setSuggestions([]);
     };
-
+    
+    // Handle clicking on a movie
     const handleMovieClick = (movieId) => {
         history(`/movie/${movieId}`);
         clearSearchInput();
     };
+
+    // Genre filtering.....................
+
+    // const filterMoviesByGenre = (genre) => {
+    //     console.log(genre);
+    //     setSelectedGenre(genre);
+    //     clearSearchInput(); // Clear search input when selecting a genre
+    // };
+    
+
+    // const movieGenres = ["Action", "Adventure", "Comedy", "Drama", "Horror", "Romance", "Sci-Fi", "Thriller"];
+
+    // const filteredMovies = (searchData && selectedGenre !== 'All') ? searchData.filter(movie => movie.genre.includes(selectedGenre)) : searchData;
+
+
+    //Language filtering......................
+
+    const MovieLanguage = ["Tamil","English"];
+
+    // const filterMovieByLanguage = (language) =>{
+    //     history(`/${language}`);
+    // };
+
+
 
     return (
         <div className='header-parent'>
@@ -46,8 +70,27 @@ const Header = (props) => {
                 </div>
                 <div className='header-routes'>
                     <Link to={'/'} className='link'>Home</Link>
-                    <Link href='#genres' className='link'>Genres</Link>
-                    <Link to={'/Lanugages'} className='link'>Languages</Link>
+                    {/* <div className='dropdown'>
+                        <button className='dropbtn'>Genres</button>
+                        <div className='dropdown-content'>
+                            {movieGenres.map((item,index)=>(
+                                <Link key={index} to={`/movie/${item}`} className='dropdown-link' onClick={()=> filterMoviesByGenre(item)}>
+                                    {item}
+                                </Link>
+                            ))}
+                        </div>
+                    </div> */}
+
+                    <div className='dropdown'>
+                        <button className='dropbtn'>Languages</button>
+                        <div className='dropdown-content'>
+                            {MovieLanguage.map((item,index)=>(
+                                <Link key={index} to={`/language/${item}`} className='dropdown-link' >
+                                    {item}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -59,8 +102,8 @@ const Header = (props) => {
                         <ul className="suggestions">
                             {suggestions.map((movie, index) => (
                                 <li key={index} onClick={() => handleMovieClick(movie._id)}>
-                                {movie.movieName}
-                            </li>
+                                    {movie.movieName}
+                                </li>
                             ))}
                         </ul>
                     )}
@@ -76,4 +119,4 @@ const Header = (props) => {
     )
 }
 
-export default Header
+export default Header;

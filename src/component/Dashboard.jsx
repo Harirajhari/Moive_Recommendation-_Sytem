@@ -5,6 +5,7 @@ function Dashboard(props) {
     const { data } = props;
     const [currentSlide, setCurrentSlide] = useState(0);
 
+
     const latestItems = data ? data.slice(0, 4) : [];
 
     const nextSlide = () => {
@@ -23,6 +24,7 @@ function Dashboard(props) {
                     {latestItems.map((item, index) => (
                         <div className="slide" key={index}>
                             <img src={`http://localhost:8000/images/${item.movieImage}`} alt={item.movieName} />
+                            {/* <img src={`http://localhost:8000/images/Jailer.jpeg`} alt={item.movieName} /> */}
                             {/* <h1>{item.movieImage}</h1> */}
 
                             <h1>{item.movieName}</h1>
