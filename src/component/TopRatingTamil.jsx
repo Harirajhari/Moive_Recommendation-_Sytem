@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import "./movieList.css"
 
-const MovieList = (props) => {
-    const { data, setData } = props;
+const TopRatingTamil = (props) => {
+    const {data , setdata} = props;
     const [ratingcategory, setRatingCategory] = useState();
-    
 
     useEffect(() => {
         if (data) {
@@ -15,17 +13,30 @@ const MovieList = (props) => {
                 const ratingB = parseFloat(b.rating.split('/')[0]);
                 return ratingB - ratingA;
             });
-            const top10Movies = sortedCategories.slice(0, 10);
-            setRatingCategory(top10Movies);
+            setRatingCategory(sortedCategories);
         }
     }, [data]);
 
-    return (
-        <div style={{ height: "60vh" }}>
-            <div><h1 className='top-rating-heading'>Top Rating Movie</h1></div>
+
+    const arr = [];
+
+    ratingcategory != null && ratingcategory.map((item, index) => {
+        if (item.language === "Tamil") {
+            arr.push({ _id: item._id, movieName: item.movieName,movieImage:item.movieImage})
+        }
+    });
+
+    console.log(arr);
+    
+
+
+  return (
+    <div>
+       <div style={{ height: "60vh" }}>
+            <div><h1 className='top-rating-heading'>Top Tamil Rating Movie</h1></div>
             <div className='parent'>
                 <div className='card-container' >
-                    {ratingcategory && ratingcategory.map((item, index) => (
+                    {arr && arr.map((item, index) => (
                         <Link to={`/movie/${item._id}`} key={item._id} className='card'>
                         <img src={`http://localhost:8000/images/${item.movieImage}`} alt='Movie poster' />
                         <div className='movieName-List'>
@@ -38,9 +49,8 @@ const MovieList = (props) => {
                 </div>
             </div>
         </div>
-    );
-
+    </div>
+  )
 }
 
-export default MovieList;
-
+export default TopRatingTamil

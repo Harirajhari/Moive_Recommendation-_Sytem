@@ -13,6 +13,7 @@ import Category from "./component/category";
 import axios from "axios";
 import "./app.css";
 import LanguageCAT from "./component/LanguageCAT";
+import TopRatingTamil from "./component/TopRatingTamil";
 
 function App() {
   const [data, setData] = useState(null);
@@ -37,7 +38,6 @@ function App() {
         <Route path="/" element={<Home data={data} />} />
         <Route path="/movie/:id" element={<Category />} />
         <Route path="/language/:language" element={<LanguageCAT data={data}/>} />
-        {/* <Route path="/" */}
       </Routes>
     </Router>
   );
@@ -52,7 +52,7 @@ function Home({ data }) {
       </div>
       <Dashboard data={data} />
       <MovieList data={data} />
-      {/* <TopTamil data={data}/> */}
+      <TopRatingTamil data={data} />
     </div>
   );
 }

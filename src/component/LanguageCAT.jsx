@@ -6,8 +6,8 @@ const LanguageCAT = (props) => {
     const { language } = useParams();
 
     const { data } = props;
+    
     const arr = [];
-
     data != null && data.map((item, index) => {
         if (item.language === language) {
             arr.push({ id: item._id, movieName: item.movieName, movieImage: item.movieImage })
