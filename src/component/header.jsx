@@ -8,7 +8,7 @@ const Header = (props) => {
     const { searchData } = props;
     const [searchInput, setSearchInput] = useState('');
     const [suggestions, setSuggestions] = useState([]);
-    // const [selectedGenre, setSelectedGenre] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState('');
     const history = useNavigate();
 
     // Search the movie part
@@ -39,16 +39,16 @@ const Header = (props) => {
 
     // Genre filtering.....................
 
-    // const filterMoviesByGenre = (genre) => {
-    //     console.log(genre);
-    //     setSelectedGenre(genre);
-    //     clearSearchInput(); // Clear search input when selecting a genre
-    // };
+    const filterMoviesByGenre = (genre) => {
+        console.log(genre);
+        setSelectedGenre(genre);
+        clearSearchInput(); // Clear search input when selecting a genre
+    };
     
 
-    // const movieGenres = ["Action", "Adventure", "Comedy", "Drama", "Horror", "Romance", "Sci-Fi", "Thriller"];
+    const movieGenres = ["Action", "Adventure", "Comedy", "Drama", "Horror", "Romance", "Sci-Fi", "Thriller"];
 
-    // const filteredMovies = (searchData && selectedGenre !== 'All') ? searchData.filter(movie => movie.genre.includes(selectedGenre)) : searchData;
+    const filteredMovies = (searchData && selectedGenre !== 'All') ? searchData.filter(movie => movie.genre.includes(selectedGenre)) : searchData;
 
 
     //Language filtering......................
@@ -70,7 +70,7 @@ const Header = (props) => {
                 </div>
                 <div className='header-routes'>
                     <Link to={'/'} className='link'>Home</Link>
-                    {/* <div className='dropdown'>
+                    <div className='dropdown'>
                         <button className='dropbtn'>Genres</button>
                         <div className='dropdown-content'>
                             {movieGenres.map((item,index)=>(
@@ -79,7 +79,7 @@ const Header = (props) => {
                                 </Link>
                             ))}
                         </div>
-                    </div> */}
+                    </div>
 
                     <div className='dropdown'>
                         <button className='dropbtn'>Languages</button>

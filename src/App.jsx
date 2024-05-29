@@ -23,6 +23,7 @@ function App() {
       try {
         const response = await axios.get("http://localhost:8000/");
         const sortedData = response.data.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+        console.log(sortedData);
         setData(sortedData);
       } catch (error) {
         console.log(error);
@@ -45,6 +46,7 @@ function App() {
 
 // Home component to render Dashboard and MovieList
 function Home({ data }) {
+
   return (
     <div>
       <div style={{ margin: "20px" }}>
